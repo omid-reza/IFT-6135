@@ -71,10 +71,6 @@ class LSTM(nn.Module):
             - h (`torch.FloatTensor` of shape `(num_layers, batch_size, hidden_size)`)
             - c (`torch.FloatTensor` of shape `(num_layers, batch_size, hidden_size)`)
         """
-
-        # ==========================
-        # TODO: Write your code here
-        # ==========================
         embedding_output = self.embedding(inputs)
         lstm_output, lstm_hidden_states = self.lstm(embedding_output, hidden_states)
         classifier_output = self.classifier(lstm_output)
@@ -105,23 +101,9 @@ class LSTM(nn.Module):
         loss (`torch.FloatTensor` scalar)
             The scalar loss, corresponding to the (mean) negative log-likelihood.
         """
-
-        # ==========================
-        # TODO: Write your code here
-        # ==========================
-        log_probas_flat = log_probas.view(-1, log_probas.size(-1))
-        targets_flat = targets.view(-1)
-
-        # Compute the negative log likelihood loss
-        loss = F.cross_entropy(log_probas_flat, targets_flat, reduction='none')
-
-        # Apply the mask to ignore padding positions
-        masked_loss = loss * mask.view(-1)
-
-        # Compute the mean loss over non-padding positions
-        mean_loss = torch.sum(masked_loss) / torch.sum(mask)
-
-        return mean_loss
+        log_prob_flat = log_probas.view(-1, log_probas.size(-1))
+        loss = F.cross_entropy(log_prob_flat, targets.view(-1), reduction='none')
+        return torch.sum(loss * mask.view(-1)) / torch.sum(mask)
 
     def initial_states(self, batch_size, device=None):
         if device is None:
