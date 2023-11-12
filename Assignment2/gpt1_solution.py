@@ -36,6 +36,7 @@ class LayerNorm(nn.Module):
         outputs (`torch.FloatTensor` of shape `(*dims, hidden_size)`)
             The output tensor, having the same shape as `inputs`.
         """
+        # Note: due to lower version of my pytorch, i passed unbiased parameter, but in newer version it has been changed to correction!
         mean = inputs.mean(dim=-1, keepdim=True)
         return ((inputs - mean) / torch.square(torch.var(inputs, unbiased=False)+self.eps)) * self.weight + self.bias
 
