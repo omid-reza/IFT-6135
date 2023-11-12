@@ -111,10 +111,17 @@ class LSTM(nn.Module):
         # ==========================
         log_probas_flat = log_probas.view(-1, log_probas.size(-1))
         targets_flat = targets.view(-1)
-        loss = F.nll_loss(log_probas_flat, targets_flat, weight=mask.view(-1), reduction='sum')
-        num_non_padding = mask.sum()
-        loss /= num_non_padding
-        return loss
+
+        # Compute the negative log likelihood loss
+        loss = F.cross_entropy(log_probas_flat, targets_flat, reduction='none')
+
+        # Apply the mask to ignore padding positions
+        masked_loss = loss * mask.view(-1)
+
+        # Compute the mean loss over non-padding positions
+        mean_loss = torch.sum(masked_loss) / torch.sum(mask)
+
+        return mean_loss
 
     def initial_states(self, batch_size, device=None):
         if device is None:
