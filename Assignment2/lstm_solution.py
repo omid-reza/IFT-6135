@@ -109,7 +109,11 @@ class LSTM(nn.Module):
         # ==========================
         # TODO: Write your code here
         # ==========================
-        loss = F.nll_loss(log_probas.permute(0, 2, 1), targets, weight=mask, reduction='mean')
+        log_probas_flat = log_probas.view(-1, log_probas.size(-1))
+        targets_flat = targets.view(-1)
+        loss = F.nll_loss(log_probas_flat, targets_flat, weight=mask.view(-1), reduction='sum')
+        num_non_padding = mask.sum()
+        loss /= num_non_padding
         return loss
 
     def initial_states(self, batch_size, device=None):
