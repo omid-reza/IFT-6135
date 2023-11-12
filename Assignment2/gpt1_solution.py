@@ -36,11 +36,8 @@ class LayerNorm(nn.Module):
         outputs (`torch.FloatTensor` of shape `(*dims, hidden_size)`)
             The output tensor, having the same shape as `inputs`.
         """
-
-        # ==========================
-        # TODO: Write your code here
-        # ==========================
-        pass
+        mean = inputs.mean(dim=-1, keepdim=True)
+        return ((inputs - mean) / torch.square(torch.var(inputs, correction=0)+self.eps)) * self.weight + self.bias
 
     def reset_parameters(self):
         nn.init.ones_(self.weight)
