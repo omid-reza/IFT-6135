@@ -78,7 +78,6 @@ class LSTM(nn.Module):
         embedding_output = self.embedding(inputs)
         lstm_output, lstm_hidden_states = self.lstm(embedding_output, hidden_states)
         classifier_output = self.classifier(lstm_output)
-        return 's'
         return F.log_softmax(classifier_output, dim=-1), lstm_hidden_states
 
     def loss(self, log_probas, targets, mask):
