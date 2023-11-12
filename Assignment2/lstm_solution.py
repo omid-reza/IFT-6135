@@ -109,7 +109,8 @@ class LSTM(nn.Module):
         # ==========================
         # TODO: Write your code here
         # ==========================
-        pass
+        loss = F.nll_loss(log_probas.permute(0, 2, 1), targets, weight=mask, reduction='mean')
+        return loss
 
     def initial_states(self, batch_size, device=None):
         if device is None:
