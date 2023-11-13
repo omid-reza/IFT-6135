@@ -183,11 +183,7 @@ class MultiHeadedAttention(nn.Module):
             vectors. Here `dim` is the same dimension as the one in the
             definition of the input `tensor` above.
         """
-
-        # ==========================
-        # TODO: Write your code here
-        # ==========================
-        pass
+        return tensor.view(tensor.size(0), self.num_heads, tensor.size(1), -1)
 
     def merge_heads(self, tensor):
         """Merge the head vectors.
@@ -211,11 +207,7 @@ class MultiHeadedAttention(nn.Module):
             vectors. Here `dim` is the same dimension as the one in the
             definition of the input `tensor` above.
         """
-
-        # ==========================
-        # TODO: Write your code here
-        # ==========================
-        pass
+        return tensor.view(tensor.size(0), tensor.size(2), tensor.size(1) * tensor.size(3))
 
     def forward(self, hidden_states):
         """Multi-headed attention.
