@@ -408,11 +408,9 @@ class MiniGPT1(nn.Module):
         loss (`torch.FloatTensor` scalar)
             The scalar loss, corresponding to the (mean) negative log-likelihood.
         """
-
-        # ==========================
-        # TODO: Write your code here
-        # ==========================
-        pass
+        log_pr_flatted = log_probas.view(-1, self.vocabulary_size)
+        ls = nn.functional.cross_entropy(log_pr_flatted, targets.view(-1), ignore_index=0, reduction='none')
+        return torch.sum(ls * mask.view(-1)) / torch.sum(mask)
 
     @classmethod
     def load_embeddings_from(
