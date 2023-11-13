@@ -84,7 +84,7 @@ class Wikitext2(Dataset):
         # Load the dataset
         filename = os.path.join(self.root, "wiki.{0}.npz".format(split))
         with open(filename, "rb") as f:
-            data = np.load(f, allow_pickle=True)
+            data = np.load(f)
             self._tokens = torch.from_numpy(data["tokens"].astype(np.int64))
             self._sizes = tuple(data["sizes"])
 
