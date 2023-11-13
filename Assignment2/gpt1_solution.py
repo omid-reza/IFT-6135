@@ -55,6 +55,10 @@ class MultiHeadedAttention(nn.Module):
         # ==========================
         # TODO: Write your code here
         # ==========================
+        self.query_projection = nn.Linear(head_size * num_heads, head_size * num_heads)
+        self.key_projection = nn.Linear(head_size * num_heads, head_size * num_heads)
+        self.value_projection = nn.Linear(head_size * num_heads, head_size * num_heads)
+        self.output_projection = nn.Linear(head_size * num_heads, head_size * num_heads)
 
     def get_attention_weights(self, queries, keys):
         """Compute the attention weights.
@@ -97,11 +101,14 @@ class MultiHeadedAttention(nn.Module):
             model here, `attention_weights[1, 3, 5, 7] == 0`, since the 8th token
             should not influence on the 6th token (7 > 5).
         """
-
-        # ==========================
-        # TODO: Write your code here
-        # ==========================
-        pass
+        attention_scrs = torch.matmul(queries, keys.transpose(-2, -1)) * (1.0 / (self.head_size ** 0.5))
+        ones_tensor = torch.ones(self.sequence_length, self.sequence_length)
+        mask = torch.tril(ones_tensor).view(1, 1, self.sequence_length, self.sequence_length)
+        attention_scrs = attention_scrs.masked_fill(mask == 0, float('-inf'))
+        attention_m = attention_scrs - attention_scrs.max(dim=-1, keepdim=True).values
+        weights = torch.exp(attention_m) * mask
+        weights /= weights.sum(dim=-1, keepdim=True)
+        return weights
 
     def apply_attention(self, queries, keys, values):
         """Apply the attention.
@@ -149,12 +156,9 @@ class MultiHeadedAttention(nn.Module):
             example, `outputs[0, 2]` contains the output of the attention
             (concatenated for all heads) for the 3rd token (index 2) of the 1st
             sequence in the batch (index 0).
-        """
-
-        # ==========================
-        # TODO: Write your code here
-        # ==========================
-        pass
+        """ 
+        nvalues = torch.matmul(self.get_attention_weights(queries, keys), values)
+        return nvalues.view(nvalues.size(0), -1, self.num_heads * self.head_size)
 
     def split_heads(self, tensor):
         """Split the head vectors.
