@@ -55,10 +55,10 @@ class MultiHeadedAttention(nn.Module):
         # ==========================
         # TODO: Write your code here
         # ==========================
-        self.query_projection = nn.Linear(head_size * num_heads, head_size * num_heads)
-        self.key_projection = nn.Linear(head_size * num_heads, head_size * num_heads)
-        self.value_projection = nn.Linear(head_size * num_heads, head_size * num_heads)
-        self.output_projection = nn.Linear(head_size * num_heads, head_size * num_heads)
+        self.W_Q = nn.Linear(head_size * num_heads, head_size * num_heads)
+        self.W_K = nn.Linear(head_size * num_heads, head_size * num_heads)
+        self.W_V = nn.Linear(head_size * num_heads, head_size * num_heads)
+        self.W_Y = nn.Linear(head_size * num_heads, head_size * num_heads)
 
     def get_attention_weights(self, queries, keys):
         """Compute the attention weights.
@@ -240,11 +240,11 @@ class MultiHeadedAttention(nn.Module):
             Tensor containing the output of multi-headed attention for all the
             sequences in the batch, and all positions in each sequence.
         """
-
-        # ==========================
-        # TODO: Write your code here
-        # ==========================
-        pass
+        q = self.split_heads(self.W_Q(hidden_states)) 
+        k = self.split_heads(self.W_K(hidden_states)) 
+        v = self.split_heads(self.W_V(hidden_states))
+        o = self.apply_attention(q, k, v)
+        return self.W_Y(o)
 
 
 class Block(nn.Module):
