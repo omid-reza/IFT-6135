@@ -342,11 +342,9 @@ class MiniGPT1(nn.Module):
             is the embedding vector for the token in 3rd position (index 2)
             of the 1st sequence in the batch (index 0).
         """
+        psitions = torch.arange(self.sequence_length).unsqueeze(0).expand(inputs.size(0), -1)
+        return self.embedding(inputs, psitions)
 
-        # ==========================
-        # TODO: Write your code here
-        # ==========================
-        pass
 
     def forward(self, inputs):
         """Mini GPT-1.
@@ -369,11 +367,10 @@ class MiniGPT1(nn.Module):
             after x_{4} at index 3, and token_{7} for index 6) for the 1st sequence
             of the batch (index 0).
         """
-
-        # ==========================
-        # TODO: Write your code here
-        # ==========================
-        pass
+        embdngs = self.get_embeddings(inputs)
+        for layer in self.layers:
+            embdngs = layer(embdngs)
+        return self.classifier(embdngs)
 
     def loss(self, log_probas, targets, mask):
         """Loss function.
