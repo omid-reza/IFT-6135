@@ -1,0 +1,12 @@
+lstm_layer_2_btch_16_adamw, Before Training, Load: 0.05, Free Memory: 14636.0, Used Memory: 465.0, Total Memory: 15360.0
+lstm_layer_2_btch_16_adamw, After Epoch 0, Load: 0.97, Free Memory: 11270.0, Used Memory: 3831.0, Total Memory: 15360.0
+lstm_layer_2_btch_16_adamw, After Epoch 1, Load: 0.85, Free Memory: 11270.0, Used Memory: 3831.0, Total Memory: 15360.0
+lstm_layer_2_btch_16_adamw, After Epoch 2, Load: 0.97, Free Memory: 11270.0, Used Memory: 3831.0, Total Memory: 15360.0
+lstm_layer_2_btch_16_adamw, After Epoch 3, Load: 0.97, Free Memory: 11270.0, Used Memory: 3831.0, Total Memory: 15360.0
+lstm_layer_2_btch_16_adamw, After Epoch 4, Load: 0.97, Free Memory: 11270.0, Used Memory: 3831.0, Total Memory: 15360.0
+lstm_layer_2_btch_16_adamw, After Epoch 5, Load: 0.98, Free Memory: 11270.0, Used Memory: 3831.0, Total Memory: 15360.0
+lstm_layer_2_btch_16_adamw, After Epoch 6, Load: 0.98, Free Memory: 11270.0, Used Memory: 3831.0, Total Memory: 15360.0
+lstm_layer_2_btch_16_adamw, After Epoch 7, Load: 0.98, Free Memory: 11270.0, Used Memory: 3831.0, Total Memory: 15360.0
+lstm_layer_2_btch_16_adamw, After Epoch 8, Load: 0.95, Free Memory: 11270.0, Used Memory: 3831.0, Total Memory: 15360.0
+lstm_layer_2_btch_16_adamw, After Epoch 9, Load: 0.98, Free Memory: 11270.0, Used Memory: 3831.0, Total Memory: 15360.0
+lstm_layer_2_btch_16_adamw, After Training, Load: 0.97, Free Memory: 11268.0, Used Memory: 3833.0, Total Memory: 15360.0
