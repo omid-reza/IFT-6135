@@ -11,7 +11,6 @@ Original file is located at
 ## Initialization
 """
 
-# Commented out IPython magic to ensure Python compatibility.
 #@title Mount your Google Drive
 # If you run this notebook locally or on a cluster (i.e. not on Google Colab)
 # you can delete this cell which is specific to Google Colab. You may also
@@ -20,8 +19,8 @@ Original file is located at
 # %load_ext autoreload
 # %autoreload 2
 
-from google.colab import drive
-drive.mount('/content/gdrive')
+# from google.colab import drive
+# drive.mount('/content/gdrive')
 
 # !pip install gradescope-utils
 # !pip install tqdm
@@ -59,7 +58,7 @@ EMBEDDINGS_URL = "https://www.dropbox.com/s/g91502hubcmb4ob/embeddings.npz?dl=0"
 Run the following cell in order to run the public tests to check to tensor shapes of the outputs of your functions.
 """
 
-!python -m unittest discover -s /content/assignment/
+# !python -m unittest discover -s /content/assignment/
 
 """## Experiments
 
