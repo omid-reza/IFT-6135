@@ -36,9 +36,8 @@ class LayerNorm(nn.Module):
         outputs (`torch.FloatTensor` of shape `(*dims, hidden_size)`)
             The output tensor, having the same shape as `inputs`.
         """
-        # Note: due to lower version of my pytorch, i passed unbiased parameter, but in newer version it has been changed to correction!
-        mean = inputs.mean(dim=-1, keepdim=True)
-        return ((inputs - mean) / torch.square(torch.var(inputs, unbiased=False)+self.eps)) * self.weight + self.bias
+        scaled_inputs = (inputs - inputs.mean(dim=-1, keepdim=True)) / (torch.std(inputs, dim=-1, unbiased=False, keepdim=True) + self.eps)
+        return scaled_inputs * self.weight + self.bias
 
     def reset_parameters(self):
         nn.init.ones_(self.weight)
@@ -52,9 +51,6 @@ class MultiHeadedAttention(nn.Module):
         self.num_heads = num_heads
         self.sequence_length = sequence_length
 
-        # ==========================
-        # TODO: Write your code here
-        # ==========================
         self.W_Q = nn.Linear(head_size * num_heads, head_size * num_heads)
         self.W_K = nn.Linear(head_size * num_heads, head_size * num_heads)
         self.W_V = nn.Linear(head_size * num_heads, head_size * num_heads)
@@ -101,14 +97,11 @@ class MultiHeadedAttention(nn.Module):
             model here, `attention_weights[1, 3, 5, 7] == 0`, since the 8th token
             should not influence on the 6th token (7 > 5).
         """
-        attention_scrs = torch.matmul(queries, keys.transpose(-2, -1)) * (1.0 / (self.head_size ** 0.5))
-        ones_tensor = torch.ones(self.sequence_length, self.sequence_length)
-        mask = torch.tril(ones_tensor).view(1, 1, self.sequence_length, self.sequence_length)
-        attention_scrs = attention_scrs.masked_fill(mask == 0, float('-inf'))
-        attention_m = attention_scrs - attention_scrs.max(dim=-1, keepdim=True).values
-        weights = torch.exp(attention_m) * mask
-        weights /= weights.sum(dim=-1, keepdim=True)
-        return weights
+
+        weights = torch.matmul(queries, keys.transpose(-2, -1)) / (self.head_size ** 0.5)
+        mask = torch.triu(torch.ones_like(weights), diagonal=1)
+        weights = weights.masked_fill(mask==1, float('-inf'))
+        return F.softmax(weights, dim=-1)
 
     def apply_attention(self, queries, keys, values):
         """Apply the attention.
@@ -156,9 +149,8 @@ class MultiHeadedAttention(nn.Module):
             example, `outputs[0, 2]` contains the output of the attention
             (concatenated for all heads) for the 3rd token (index 2) of the 1st
             sequence in the batch (index 0).
-        """ 
-        nvalues = torch.matmul(self.get_attention_weights(queries, keys), values)
-        return nvalues.view(nvalues.size(0), -1, self.num_heads * self.head_size)
+        """
+        return self.merge_heads(torch.matmul(self.get_attention_weights(queries, keys), values))
 
     def split_heads(self, tensor):
         """Split the head vectors.
@@ -183,7 +175,8 @@ class MultiHeadedAttention(nn.Module):
             vectors. Here `dim` is the same dimension as the one in the
             definition of the input `tensor` above.
         """
-        return tensor.view(tensor.size(0), self.num_heads, tensor.size(1), -1)
+        dim = tensor.size(-1) // self.num_heads
+        return tensor.view(tensor.size(0), -1, self.num_heads, dim).transpose(1, 2)
 
     def merge_heads(self, tensor):
         """Merge the head vectors.
@@ -207,7 +200,7 @@ class MultiHeadedAttention(nn.Module):
             vectors. Here `dim` is the same dimension as the one in the
             definition of the input `tensor` above.
         """
-        return tensor.view(tensor.size(0), tensor.size(2), tensor.size(1) * tensor.size(3))
+        return tensor.transpose(1, 2).contiguous().view(tensor.size(0), tensor.size(2), -1)
 
     def forward(self, hidden_states):
         """Multi-headed attention.
@@ -345,7 +338,6 @@ class MiniGPT1(nn.Module):
         psitions = torch.arange(self.sequence_length).unsqueeze(0).expand(inputs.size(0), -1)
         return self.embedding(inputs, psitions)
 
-
     def forward(self, inputs):
         """Mini GPT-1.
 
@@ -370,7 +362,7 @@ class MiniGPT1(nn.Module):
         embdngs = self.get_embeddings(inputs)
         for layer in self.layers:
             embdngs = layer(embdngs)
-        return self.classifier(embdngs)
+        return F.log_softmax(self.classifier(embdngs), dim=-1)
 
     def loss(self, log_probas, targets, mask):
         """Loss function.
