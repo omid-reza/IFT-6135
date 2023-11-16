@@ -23,9 +23,9 @@ Original file is located at
 from google.colab import drive
 drive.mount('/content/gdrive')
 
-!pip install gradescope-utils
-!pip install tqdm
-!pip install GPUtil
+# !pip install gradescope-utils
+# !pip install tqdm
+# !pip install GPUtil
 
 """### Running on GPU
 For this assignment, it will be necessary to run your experiments on GPU. To make sure the notebook is running on GPU, you can change the notebook settings with
