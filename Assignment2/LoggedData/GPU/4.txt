@@ -1,0 +1,12 @@
+lstm_layer_1_btch_16_momentum, Before Training, Load: 0.0, Free Memory: 12146.0, Used Memory: 2955.0, Total Memory: 15360.0
+lstm_layer_1_btch_16_momentum, After Epoch 0, Load: 0.98, Free Memory: 11512.0, Used Memory: 3589.0, Total Memory: 15360.0
+lstm_layer_1_btch_16_momentum, After Epoch 1, Load: 0.96, Free Memory: 11512.0, Used Memory: 3589.0, Total Memory: 15360.0
+lstm_layer_1_btch_16_momentum, After Epoch 2, Load: 0.97, Free Memory: 11512.0, Used Memory: 3589.0, Total Memory: 15360.0
+lstm_layer_1_btch_16_momentum, After Epoch 3, Load: 0.96, Free Memory: 11512.0, Used Memory: 3589.0, Total Memory: 15360.0
+lstm_layer_1_btch_16_momentum, After Epoch 4, Load: 0.97, Free Memory: 11512.0, Used Memory: 3589.0, Total Memory: 15360.0
+lstm_layer_1_btch_16_momentum, After Epoch 5, Load: 0.97, Free Memory: 11512.0, Used Memory: 3589.0, Total Memory: 15360.0
+lstm_layer_1_btch_16_momentum, After Epoch 6, Load: 0.96, Free Memory: 11512.0, Used Memory: 3589.0, Total Memory: 15360.0
+lstm_layer_1_btch_16_momentum, After Epoch 7, Load: 0.97, Free Memory: 11512.0, Used Memory: 3589.0, Total Memory: 15360.0
+lstm_layer_1_btch_16_momentum, After Epoch 8, Load: 0.96, Free Memory: 11512.0, Used Memory: 3589.0, Total Memory: 15360.0
+lstm_layer_1_btch_16_momentum, After Epoch 9, Load: 0.97, Free Memory: 11512.0, Used Memory: 3589.0, Total Memory: 15360.0
+lstm_layer_1_btch_16_momentum, After Training, Load: 0.98, Free Memory: 11512.0, Used Memory: 3589.0, Total Memory: 15360.0
