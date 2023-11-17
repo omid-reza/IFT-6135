@@ -1,0 +1,12 @@
+gpt1_layer_4_btch_16_adamw, Before Training, Load: 0.0, Free Memory: 10962.0, Used Memory: 4139.0, Total Memory: 15360.0
+gpt1_layer_4_btch_16_adamw, After Epoch 0, Load: 0.97, Free Memory: 10328.0, Used Memory: 4773.0, Total Memory: 15360.0
+gpt1_layer_4_btch_16_adamw, After Epoch 1, Load: 0.99, Free Memory: 10328.0, Used Memory: 4773.0, Total Memory: 15360.0
+gpt1_layer_4_btch_16_adamw, After Epoch 2, Load: 0.99, Free Memory: 10328.0, Used Memory: 4773.0, Total Memory: 15360.0
+gpt1_layer_4_btch_16_adamw, After Epoch 3, Load: 0.98, Free Memory: 10328.0, Used Memory: 4773.0, Total Memory: 15360.0
+gpt1_layer_4_btch_16_adamw, After Epoch 4, Load: 0.97, Free Memory: 10328.0, Used Memory: 4773.0, Total Memory: 15360.0
+gpt1_layer_4_btch_16_adamw, After Epoch 5, Load: 0.97, Free Memory: 10328.0, Used Memory: 4773.0, Total Memory: 15360.0
+gpt1_layer_4_btch_16_adamw, After Epoch 6, Load: 0.97, Free Memory: 10328.0, Used Memory: 4773.0, Total Memory: 15360.0
+gpt1_layer_4_btch_16_adamw, After Epoch 7, Load: 0.99, Free Memory: 10328.0, Used Memory: 4773.0, Total Memory: 15360.0
+gpt1_layer_4_btch_16_adamw, After Epoch 8, Load: 0.84, Free Memory: 10328.0, Used Memory: 4773.0, Total Memory: 15360.0
+gpt1_layer_4_btch_16_adamw, After Epoch 9, Load: 0.98, Free Memory: 10328.0, Used Memory: 4773.0, Total Memory: 15360.0
+gpt1_layer_4_btch_16_adamw, After Training, Load: 0.99, Free Memory: 10328.0, Used Memory: 4773.0, Total Memory: 15360.0
