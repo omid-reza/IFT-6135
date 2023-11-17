@@ -1,0 +1,12 @@
+gpt1_layer_1_btch_16_momentum, Before Training, Load: 0.0, Free Memory: 14836.0, Used Memory: 265.0, Total Memory: 15360.0
+gpt1_layer_1_btch_16_momentum, After Epoch 0, Load: 0.98, Free Memory: 11296.0, Used Memory: 3805.0, Total Memory: 15360.0
+gpt1_layer_1_btch_16_momentum, After Epoch 1, Load: 0.97, Free Memory: 11296.0, Used Memory: 3805.0, Total Memory: 15360.0
+gpt1_layer_1_btch_16_momentum, After Epoch 2, Load: 0.98, Free Memory: 11296.0, Used Memory: 3805.0, Total Memory: 15360.0
+gpt1_layer_1_btch_16_momentum, After Epoch 3, Load: 0.88, Free Memory: 11296.0, Used Memory: 3805.0, Total Memory: 15360.0
+gpt1_layer_1_btch_16_momentum, After Epoch 4, Load: 0.97, Free Memory: 11296.0, Used Memory: 3805.0, Total Memory: 15360.0
+gpt1_layer_1_btch_16_momentum, After Epoch 5, Load: 0.99, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
+gpt1_layer_1_btch_16_momentum, After Epoch 6, Load: 0.97, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
+gpt1_layer_1_btch_16_momentum, After Epoch 7, Load: 0.98, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
+gpt1_layer_1_btch_16_momentum, After Epoch 8, Load: 0.98, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
+gpt1_layer_1_btch_16_momentum, After Epoch 9, Load: 0.99, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
+gpt1_layer_1_btch_16_momentum, After Training, Load: 0.99, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
