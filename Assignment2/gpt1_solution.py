@@ -99,7 +99,7 @@ class MultiHeadedAttention(nn.Module):
         """
 
         weights = torch.matmul(queries, keys.transpose(-2, -1)) / (self.head_size ** 0.5)
-        mask = torch.triu(torch.ones_like(weights), diagonal=1)
+        mask = torch.triu(torch.ones_like(weights).to("cuda"), diagonal=1).to("cuda")
         weights = weights.masked_fill(mask==1, float('-inf'))
         return F.softmax(weights, dim=-1)
 
@@ -335,7 +335,7 @@ class MiniGPT1(nn.Module):
             is the embedding vector for the token in 3rd position (index 2)
             of the 1st sequence in the batch (index 0).
         """
-        psitions = torch.arange(self.sequence_length).unsqueeze(0).expand(inputs.size(0), -1)
+        psitions = torch.arange(self.sequence_length).unsqueeze(0).expand(inputs.size(0), -1).to("cuda")
         return self.embedding(inputs, psitions)
 
     def forward(self, inputs):
