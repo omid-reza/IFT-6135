@@ -1,8 +1,8 @@
 import pandas as pd
 from matplotlib import pyplot as plt
-executed_configs = [1, 2, 3, 4, 5, 6, 9, 10, 11]
 
-for config_num in executed_configs:
+plt.figure(figsize=(10, 7))
+for config_num in range(1, 12+1):
     data=pd.read_csv(f"../LoggedData/GPU/{config_num}.txt", header=None)
     label = data[0].tolist()[0]
     data = data[4].tolist()
@@ -11,7 +11,6 @@ for config_num in executed_configs:
 plt.title("Memory Usage")
 plt.xlabel("Epochs")
 plt.ylabel("Memory Usage (mb)")
-plt.legend()
+plt.legend(loc="lower right")
 plt.savefig("GPURAM.png")
-plt.show()
 #%%
