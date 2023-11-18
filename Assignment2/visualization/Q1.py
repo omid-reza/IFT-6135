@@ -16,7 +16,7 @@ executed_configs = {
     11:"11-gpt1_layer_2_btch_16_adamw",
     12:"12-gpt1_layer_4_btch_16_adamw"
 }
-plt.figure(figsize=(12, 40))
+plt.figure(figsize=(15, 40))
 for x in executed_configs:
     plt.subplot(6, 2, x)
     folder_name = executed_configs[x]
@@ -27,14 +27,14 @@ for x in executed_configs:
     with open(f"../LoggedData/TrVlTs/{folder_name}/valid_ppl.txt", "r") as validation_file:
         data = l = [float(line) for line in validation_file]
         plt.plot(np.cumsum(data), label="validation")
-    plt.title(f"Experiment {x}")
+    plt.title(f"Config {x}")
     plt.ylabel("PPL")
     plt.xlabel("Epochs")
     plt.legend(loc="upper right")
 plt.savefig("EpochPPL.png")
 
 plt.cla()
-plt.figure(figsize=(12, 40))
+plt.figure(figsize=(15, 40))
 for x in executed_configs:
     folder_name = executed_configs[x]
     plt.subplot(6, 2, x)
@@ -49,7 +49,7 @@ for x in executed_configs:
             data = [float(line) for line in valid_ppl_file]
             times = [float(line) for line in valid_time_file]
             plt.plot(np.cumsum(times), data, label=f"validation")
-    plt.title(f"Experiment {x}")
+    plt.title(f"Config {x}")
     plt.ylabel("PPL")
     plt.xlabel("Time (Second)")
     plt.legend(loc="upper right")

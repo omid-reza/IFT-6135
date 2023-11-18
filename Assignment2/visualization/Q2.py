@@ -24,6 +24,7 @@ for x in executed_configs:
         with open(f"../LoggedData/TrVlTs/{folder_name}/valid_ppl.txt", "r") as valid_file:
             with open(f"../LoggedData/TrVlTs/{folder_name}/test_ppl.txt", "r") as test_file:
                 data.append({
+                    "Experiment": x,
                     "Train PPL" : mean([float(line) for line in train_file]),
                     "Validation PPL": mean([float(line) for line in valid_file]),
                     "Test PPL": mean([float(line) for line in test_file]),
