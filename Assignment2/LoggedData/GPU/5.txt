@@ -1,5 +1,4 @@
 gpt1_layer_1_btch_16_adam, Before Training, Load: 0.0, Free Memory: 14836.0, Used Memory: 265.0, Total Memory: 15360.0
-gpt1_layer_1_btch_16_adam, Before Training, Load: 0.0, Free Memory: 14836.0, Used Memory: 265.0, Total Memory: 15360.0
 gpt1_layer_1_btch_16_adam, After Epoch 0, Load: 0.97, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
 gpt1_layer_1_btch_16_adam, After Epoch 1, Load: 0.97, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
 gpt1_layer_1_btch_16_adam, After Epoch 2, Load: 0.97, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0

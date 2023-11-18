@@ -1,9 +1,3 @@
-gp1_layer_1_btch_16_sgd, Before Training, Load: 0.0, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
-gp1_layer_1_btch_16_sgd, After Epoch 0, Load: 0.97, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
-gp1_layer_1_btch_16_sgd, After Epoch 1, Load: 0.98, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
-gp1_layer_1_btch_16_sgd, After Epoch 2, Load: 0.98, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
-gp1_layer_1_btch_16_sgd, After Epoch 3, Load: 0.9, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
-gp1_layer_1_btch_16_sgd, After Epoch 4, Load: 0.98, Free Memory: 11294.0, Used Memory: 3807.0, Total Memory: 15360.0
 gp1_layer_1_btch_16_sgd, Before Training, Load: 0.0, Free Memory: 14836.0, Used Memory: 265.0, Total Memory: 15360.0
 gp1_layer_1_btch_16_sgd, After Epoch 0, Load: 0.99, Free Memory: 11930.0, Used Memory: 3171.0, Total Memory: 15360.0
 gp1_layer_1_btch_16_sgd, After Epoch 1, Load: 0.97, Free Memory: 11930.0, Used Memory: 3171.0, Total Memory: 15360.0
