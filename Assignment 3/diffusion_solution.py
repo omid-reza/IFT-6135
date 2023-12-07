@@ -19,6 +19,7 @@ def extract(a, t, x_shape):
     #         out[i] contains a[t[i]]
     
     batch_size = t.shape[0]
+    t=t.to(device)
     out = a.gather(-1, t)
     return out.reshape(batch_size, *((1,) * (len(x_shape) - 1))).to(t.device)
 
