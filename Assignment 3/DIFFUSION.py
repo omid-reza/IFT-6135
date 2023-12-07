@@ -387,7 +387,7 @@ from diffusion_solution import q_sample
 def visualize_diffusion():
     train_dataloader, _ = get_dataloaders()
     batch = next(iter(train_dataloader))
-    sample = batch['pixel_values'][3].unsqueeze(0)
+    sample = batch['pixel_values'][3].unsqueeze(0).to(device)
     noisy_images = [sample] + [q_sample(sample, torch.tensor([100 * t + 99]).to(device), (sqrt_alphas_cumprod, sqrt_one_minus_alphas_cumprod)) for t in range(10)]
     noisy_images = (torch.cat(noisy_images, dim=0) + 1.) * 0.5
     show_image(noisy_images.clamp(0., 1.), nrow=11)
