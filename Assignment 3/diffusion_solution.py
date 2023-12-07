@@ -87,7 +87,11 @@ def p_sample_loop(model, shape, timesteps, T, coefficients, noise=None):
         imgs = []
 
         for i in tqdm(reversed(range(0, timesteps)), desc='Sampling', total=T, leave=False):
-            img = p_sample(model=model, x=img, t=torch.full((b,), i, device=device, dtype=torch.long), t_index=i, coefficients=coefficients)
+            #ADDED if statement ON MY OWN
+            if noise is None:
+                img = p_sample(model=model, x=img, t=torch.full((b,), i, device=device, dtype=torch.long), t_index=i, coefficients=coefficients)
+            else:
+                img = p_sample(model=model, x=img, t=torch.full((b,), i, device=device, dtype=torch.long), t_index=i, coefficients=coefficients, noise=noise[i+1])
             imgs.append(img.cpu())
 
         return torch.stack(imgs)
