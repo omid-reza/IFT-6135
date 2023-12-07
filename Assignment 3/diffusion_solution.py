@@ -26,7 +26,7 @@ def extract(a, t, x_shape):
 
 def alphas_betas_sequences_helper(beta_start, beta_end, T):
     def linear_beta_schedule(beta_start, beta_end, timesteps):
-        return torch.linspace(beta_start, beta_end, timesteps).to(device)
+        return torch.linspace(beta_start, beta_end, timesteps)
 
     betas = linear_beta_schedule(beta_start, beta_end, T)
     alphas = 1 - betas
