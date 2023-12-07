@@ -3,8 +3,6 @@ import torch.nn.functional as F
 
 from tqdm import tqdm
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
-
 def extract(a, t, x_shape):
     # Takes a data tensor a and an index tensor t, and returns a new tensor
     # whose i^th element is just a[t[i]]. Note that this will be useful when
@@ -84,11 +82,11 @@ def p_sample_loop(model, shape, timesteps, T, coefficients, noise=None):
     with torch.no_grad():
         b = shape[0]
         # Start from pure noise (x_T)
-        img = torch.randn(shape, device="cuda") if noise is None else noise[0]
+        img = torch.randn(shape, device=model.device) if noise is None else noise[0]
         imgs = []
 
         for i in tqdm(reversed(range(0, timesteps)), desc='Sampling', total=T, leave=False):
-            img = p_sample(model=model, x=img, t=torch.full((b,), i, device="cuda", dtype=torch.long), t_index=i, coefficients=coefficients, noise=noise[i+1])
+            img = p_sample(model=model, x=img, t=torch.full((b,), i, device=model.device, dtype=torch.long), t_index=i, coefficients=coefficients, noise=noise[i+1])
             imgs.append(img.cpu())
 
         return torch.stack(imgs)
