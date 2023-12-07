@@ -19,7 +19,7 @@ def extract(a, t, x_shape):
     #         out[i] contains a[t[i]]
     
     batch_size = t.shape[0]
-    out = a.gather(-1, t.gpu())
+    out = a.gather(-1, t.cpu())
     return out.reshape(batch_size, *((1,) * (len(x_shape) - 1))).to(t.device)
 
 
@@ -67,7 +67,7 @@ def p_sample(model, x, t, t_index, coefficients,  noise=None):
         else:
             posterior_variance_t = extract(coefficients[3], t, x.shape)
             if noise is None:
-                noise = torch.randn_like(x)
+                noise = torch.randn_like(x).to(device)
             sample = p_mean + torch.sqrt(posterior_variance_t) * noise
 
         return sample
@@ -93,7 +93,7 @@ def p_sample_loop(model, shape, timesteps, T, coefficients, noise=None):
         return torch.stack(imgs)
 
 def p_losses(denoise_model, x_start, t, coefficients, noise=None):
-    noise = torch.randn_like(x_start) if noise is None else noise
+    noise = torch.randn_like(x_start, device=device) if noise is None else noise
     x_noisy = q_sample(x_start=x_start, t=t, coefficients=coefficients, noise=noise)
     predicted_noise = denoise_model(x_noisy, t)
     loss = F.smooth_l1_loss(noise, predicted_noise)
