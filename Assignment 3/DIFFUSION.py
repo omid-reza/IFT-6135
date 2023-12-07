@@ -375,7 +375,7 @@ def extract(a, t, x_shape):
     #         out[i] contains a[t[i]]
 
     batch_size = t.shape[0]
-    out = a.gather(-1, t.cpu())
+    out = a.gather(-1, t)
     return out.reshape(batch_size, *((1,) * (len(x_shape) - 1))).to(t.device)
 
 from diffusion_solution import alphas_betas_sequences_helper
@@ -388,7 +388,7 @@ def visualize_diffusion():
     train_dataloader, _ = get_dataloaders()
     batch = next(iter(train_dataloader))
     sample = batch['pixel_values'][3].unsqueeze(0)
-    noisy_images = [sample] + [q_sample(sample, torch.tensor([100 * t + 99]), (sqrt_alphas_cumprod, sqrt_one_minus_alphas_cumprod)) for t in range(10)]
+    noisy_images = [sample] + [q_sample(sample, torch.tensor([100 * t + 99]).to(device), (sqrt_alphas_cumprod, sqrt_one_minus_alphas_cumprod)) for t in range(10)]
     noisy_images = (torch.cat(noisy_images, dim=0) + 1.) * 0.5
     show_image(noisy_images.clamp(0., 1.), nrow=11)
 
