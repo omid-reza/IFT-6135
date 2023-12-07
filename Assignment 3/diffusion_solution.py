@@ -21,12 +21,12 @@ def extract(a, t, x_shape):
     
     batch_size = t.shape[0]
     out = a.gather(-1, t.cpu())
-    return out.reshape(batch_size, *((1,) * (len(x_shape) - 1))).to(device)
+    return out.reshape(batch_size, *((1,) * (len(x_shape) - 1))).to(t.device)
 
 
 def alphas_betas_sequences_helper(beta_start, beta_end, T):
     def linear_beta_schedule(beta_start, beta_end, timesteps):
-        return torch.linspace(beta_start, beta_end, timesteps)
+        return torch.linspace(beta_start, beta_end, timesteps).to(device)
 
     betas = linear_beta_schedule(beta_start, beta_end, T)
     alphas = 1 - betas
@@ -34,7 +34,7 @@ def alphas_betas_sequences_helper(beta_start, beta_end, T):
     alphas_cumprod = torch.cumprod(alphas, dim=0)
     sqrt_alphas_cumprod = torch.sqrt(alphas_cumprod)
     sqrt_one_minus_alphas_cumprod =  torch.sqrt(1 - alphas_cumprod)
-    alphas_cumprod_prev = torch.cat([torch.tensor([1.0], device=device), alphas_cumprod[:-1]])
+    alphas_cumprod_prev = torch.cat([torch.tensor([1.0], device=betas.device), alphas_cumprod[:-1]])
     posterior_variance = betas * (1 - alphas_cumprod_prev)/(1 - alphas_cumprod)
     return betas, alphas, sqrt_recip_alphas, alphas_cumprod, sqrt_alphas_cumprod, sqrt_one_minus_alphas_cumprod, alphas_cumprod_prev, posterior_variance
 
