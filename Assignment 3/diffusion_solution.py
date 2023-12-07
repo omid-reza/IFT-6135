@@ -39,7 +39,7 @@ def alphas_betas_sequences_helper(beta_start, beta_end, T):
 
 def q_sample(x_start, t, coefficients, noise=None):
     if noise is None:
-      noise = torch.randn_like(x_start, device=device)
+      noise = torch.randn_like(x_start).to(device)
     sqrt_alphas_cumprod_t = extract(coefficients[0], t, x_start.shape)
     sqrt_one_minus_alphas_cumprod_t = extract(coefficients[1], t, x_start.shape)
     x_noisy = sqrt_alphas_cumprod_t * x_start + sqrt_one_minus_alphas_cumprod_t * noise
