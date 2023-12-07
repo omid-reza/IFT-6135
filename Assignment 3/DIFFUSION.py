@@ -415,7 +415,7 @@ if __name__ == '__main__':
 
     optimizer = Adam(model.parameters(), lr=lr)
 
-epochs = 2
+epochs = 25
 
 if __name__ == '__main__':
     train_dataloader, test_dataloader = get_dataloaders()
