@@ -39,22 +39,13 @@ def alphas_betas_sequences_helper(beta_start, beta_end, T):
 
 def q_sample(x_start, t, coefficients, noise=None):
     if noise is None:
-      noise = torch.randn_like(x_start).to(device)
+      noise = torch.randn_like(x_start, device=device)
     sqrt_alphas_cumprod_t = extract(coefficients[0], t, x_start.shape)
     sqrt_one_minus_alphas_cumprod_t = extract(coefficients[1], t, x_start.shape)
     x_noisy = sqrt_alphas_cumprod_t * x_start + sqrt_one_minus_alphas_cumprod_t * noise
     return x_noisy
 
 def p_sample(model, x, t, t_index, coefficients,  noise=None):
-    # Given the denoising model, batched input x, and time-step t, returns a slightly denoised sample at time-step t-1
-    # Inputs:
-    #   model: The denoising (parameterized noise) model
-    #   x: Batched noisy input at time t; size (batch_size, 3, 32, 32)
-    #   t: Batched time steps; size (batch_size,)
-    #   t_index: Single time-step, whose batched version is present in t
-    #   coefficients: 4-tuple
-    # Returns:
-    #   sample: A sample from the distribution p_\theta(x_{t-1} | x_t); mode if t=0
     with torch.no_grad():
         betas_t = extract(coefficients[0], t, x.shape)                         # WRITE CODE HERE: Similar to q_sample, extract betas for specific t's
         sqrt_one_minus_alphas_cumprod_t = extract(coefficients[1], t, x.shape) # WRITE CODE HERE: Same as above, but for sqrt_one_minus_alphas_cumprod
@@ -67,19 +58,12 @@ def p_sample(model, x, t, t_index, coefficients,  noise=None):
         else:
             posterior_variance_t = extract(coefficients[3], t, x.shape)
             if noise is None:
-                noise = torch.randn_like(x).to(device)
+                noise = torch.randn_like(x, device=device)
             sample = p_mean + torch.sqrt(posterior_variance_t) * noise
 
         return sample
 
 def p_sample_loop(model, shape, timesteps, T, coefficients, noise=None):
-    # Given the model, and the shape of the image, returns a sample from the data distribution by running through the backward diffusion process.
-    # Inputs:
-    #   model: The denoising model
-    #   shape: Shape of the samples; set as (batch_size, 3, 32, 32)
-    #   noise: (timesteps+1, batch_size, 3, 32, 32)
-    # Returns:
-    #   imgs: Samples obtained, as well as intermediate denoising steps, of shape (T, batch_size, 3, 32, 32)
     with torch.no_grad():
         b = shape[0]
         # Start from pure noise (x_T)
