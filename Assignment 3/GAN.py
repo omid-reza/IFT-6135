@@ -140,9 +140,8 @@ class Discriminator(nn.Module):
         return self.model(input)
 generator = Generator(z_dim, input_channels).to(device)
 discriminator = Discriminator(input_channels).to(device)
-from gan_solution import discriminator_optimizer, generator_optimizer
-from gan_solution import criterion
-from gan_solution import discriminator_train, generator_train, sample
+
+from gan_solution import *
 
 epochs = 25
 
