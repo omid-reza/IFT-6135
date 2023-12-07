@@ -400,7 +400,7 @@ from diffusion_solution import p_sample, p_sample_loop
 def sample(model, image_size, batch_size=16, channels=3):
     # Returns a sample by running the sampling loop
     with torch.no_grad():
-        return p_sample_loop(model, shape=(batch_size, channels, image_size, image_size), timesteps=T, coefficients=(betas, sqrt_one_minus_alphas_cumprod, sqrt_recip_alphas, posterior_variance))
+        return p_sample_loop(model, shape=(batch_size, channels, image_size, image_size), timesteps=T, T = T, coefficients = (betas, sqrt_one_minus_alphas_cumprod, sqrt_recip_alphas, posterior_variance))
 
 from diffusion_solution import p_losses, t_sample
 
