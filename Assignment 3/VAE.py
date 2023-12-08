@@ -128,16 +128,19 @@ if __name__ == '__main__':
                 tepoch.set_postfix(loss=loss.item())
 
         samples = model.sample(batch_size=64)
-        save_image((x + 1.) * 0.5, './results_VAE/orig.png')
-        save_image((recon + 1.) * 0.5, './results_VAE/recon.png')
+        save_image((x + 1.) * 0.5, f'./results_VAE/orig_{epoch}.png')
+        save_image((recon + 1.) * 0.5, f'./results_VAE/recon_{epoch}.png')
         save_image((samples + 1.) * 0.5, f'./results_VAE/samples_{epoch}.png')
 
     show_image(((samples + 1.) * 0.5).clamp(0., 1.))
 from vae_solution import interpolate
 
-if __name__ == '__main__':
+from vae_solution import interpolate
+
+if name == 'main':
     z_1 = torch.randn(1, z_dim).to(device)
     z_2 = torch.randn(1, z_dim).to(device)
 
     interp = interpolate(model, z_1, z_2, 10)
-    show_image((interp + 1.) * 0.5, nrow=10)
+    # show_image((interp + 1.) * 0.5, nrow=10)
+    save_image((interp + 1.) * 0.5, f'./results_VAE/interpolate.png')
