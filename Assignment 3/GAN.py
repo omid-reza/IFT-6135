@@ -175,9 +175,10 @@ if __name__ == '__main__':
     show_image((samples + 1.) * 0.5)
 
 from gan_solution import interpolate
+
 if __name__ == '__main__':
     z_1 = torch.randn(1, z_dim, 1 ,1).to(device)
     z_2 = torch.randn(1, z_dim, 1, 1).to(device)
 
     interp = interpolate(generator, z_1, z_2, 10)
-    show_image((interp + 1.) * 0.5, nrow=10)
+    save_image((interp + 1.) * 0.5, f'./results_GAN/interpolate.png')
