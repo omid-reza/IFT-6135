@@ -137,7 +137,7 @@ from vae_solution import interpolate
 
 from vae_solution import interpolate
 
-if __name__ == 'main':
+if __name__ == '__main__':
     z_1 = torch.randn(1, z_dim).to(device)
     z_2 = torch.randn(1, z_dim).to(device)
 
