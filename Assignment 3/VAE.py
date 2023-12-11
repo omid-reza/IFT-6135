@@ -144,3 +144,20 @@ if __name__ == '__main__':
     interp = interpolate(model, z_1, z_2, 10)
     # show_image((interp + 1.) * 0.5, nrow=10)
     save_image((interp + 1.) * 0.5, f'./results_VAE/interpolate.png')
+
+if name == 'main':
+  _, test_dataloader = get_dataloaders()
+  with torch.no_grad():
+    with tqdm(test_dataloader, unit="batch", leave=True) as tepoch:
+      model.eval()
+      log_likelihood = 0.
+      num_samples = 0.
+      for batch in tepoch:
+        tepoch.set_description(f"Epoch: {epoch}")
+        batch_size = batch["pixel_values"].shape[0]
+        x = batch["pixel_values"].to(device)
+
+        recon, nll, kl = model(x)
+        save_image((recon + 1.) * 0.5, f'./results_VAE/test_recon_{epoch}.png')
+        log_likelihood += model.log_likelihood(x).sum()
+        num_samples += batch_size
